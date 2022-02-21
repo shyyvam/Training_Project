@@ -36,6 +36,16 @@ $username = $_REQUEST['username'];
 $Score = 0;
 $pword = $_REQUEST['password'];
 
+$checkuser="SELECT * FROM `newdata` WHERE username= '$username'";
+$result=mysqli_query($conn,$checkuser);
+$count=mysqli_num_rows($result);
+
+    if($count==1)
+    {
+        echo "This username already exists";
+    }
+    else {
+
 $sql = "INSERT INTO newdata(firstname,lastname,username,password)  VALUES ('$firstname',
            '$lastname','$username','$pword')";
 
@@ -52,5 +62,7 @@ $sql = "INSERT INTO newdata(firstname,lastname,username,password)  VALUES ('$fir
        }
 
        // Close connection
-       mysqli_close($conn);
+
+     }
+     mysqli_close($conn);
 ?>
