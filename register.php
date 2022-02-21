@@ -9,7 +9,7 @@
 <div class="container ">
 
     <h1 class="text-center">Register Here!</h1>
-    <form action="index.php" method="post">
+    <form action="dbconnect.php" method="post">
         <div class="form-group">
             <label for="fname">First Name</label>
             <input type="text" class="form-control" id="fname"
@@ -47,21 +47,7 @@
         </button>
     </form>
 </div>
-<?php
-$fn=$_POST['fname'];
-$ln=$_POST['lname'];
-$un=$_POST['username'];
-$ps=$_POST['password'];
-$sql = "INSERT INTO `data` (`firstname`, `lastname`, `username`, `score`,`password`) VALUES (`$fn`, '$ln`, `$un`,`0`,''$ps')";
 
-
-$rs = mysqli_query($con, $sql);
-
-if($rs)
-{
-	echo "Contact Records Inserted";
-}
- ?>
 
 
 
