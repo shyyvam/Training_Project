@@ -1,5 +1,5 @@
 <?php
-
+    session_start();
     $servername = "localhost";
     $username = "root";
     $password = "";
@@ -18,12 +18,11 @@
     else {
         die("Error". mysqli_connect_error());
     }
-    $sql = "CREATE TABLE Data (
-id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    $sql = "CREATE TABLE newdata (
 firstname VARCHAR(30) NOT NULL,
 lastname VARCHAR(30) NOT NULL,
 username VARCHAR(50) NOT NULL UNIQUE,
-score INT,
+score INT DEFAULT 0,
 password VARCHAR(10) NOT NULL
 )";
 if ($conn->query($sql) === TRUE) {
@@ -31,4 +30,27 @@ if ($conn->query($sql) === TRUE) {
 } else {
   echo "Error creating table: " . $conn->error;
 }
+$firstname =  $_REQUEST['fname'];
+$lastname = $_REQUEST['lname'];
+$username = $_REQUEST['username'];
+$Score = 0;
+$pword = $_REQUEST['password'];
+
+$sql = "INSERT INTO newdata(firstname,lastname,username,password)  VALUES ('$firstname',
+           '$lastname','$username','$pword')";
+
+       if(mysqli_query($conn, $sql)){
+           echo "<h3>data stored in a database successfully."
+               . " Please browse your localhost php my admin"
+               . " to view the updated data</h3>";
+
+           echo nl2br("\n$firstname\n $lastname\n "
+               . "$username\n$Score $pword");
+       } else{
+           echo "ERROR: Hush! Sorry $sql. "
+               . mysqli_error($conn);
+       }
+
+       // Close connection
+       mysqli_close($conn);
 ?>
