@@ -45,6 +45,9 @@
         <button type="submit" class="btn btn-primary">
         SignUp
         </button>
+        <div>
+          <p>Already registered?<a href="index.php">Log in</a>
+        </div>
     </form>
 </div>
 
