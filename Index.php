@@ -1,46 +1,65 @@
+
+<?php
+session_start();
+
+ ?>
+<!DOCTYPE html>
 <html>
 <head>
-  <style>
-    .imgcontainer{
-      height: 100%;
-      background-image: url("rock.png");
-      background-size: cover;
-      //background-blend-mode: lighten;
-
-    }
-    .container{
-      margin-right: auto;
-      margin-left: auto;
-      position: static;
-    }
-  </style>
+    <title>Login Form</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
-  <form action="index.php" method="post">
+<body>
+  <h2>Login Page</h2><br>
+  <form id="login" action="index.php" method="post">
     <div class="imgcontainer">
-
-
+      <div class="container">
+        <label><b>Username</b></label>
+        <input type="text" placeholder="Enter Username" name="username" id="username" required>
+        <br><br>
+        <label><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="password" id="password" required>
+        <br><br>
+        <button type="submit" value="log" name="log" id="log">Login</button>
+        <br><br>
+        <input type="checkbox" checked="checked" id="check" name="remember">
+        <span>Remember me</span>
+        <br><br>
+      </div>
 
       <div class="container">
-        <label for="uname"><b>Username</b></label>
-        <input type="text" placeholder="Enter Username" name="uname" required>
-
-        <label for="psw"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="psw" required>
-
-        <button type="submit">Login</button>
-        <label>
-          <input type="checkbox" checked="checked" name="remember"> Remember me
-        </label>
-      </div>
-
-      <div class="container" style="background-color:#f1f1f1">
         <button type="button" class="cancelbtn">Cancel</button>
-        <span class="psw">Forgot <a href="#">password?</a></span>
       </div>
+
       <div class="container">
         <span class="register">New user? <a href="register.php">register</a></span>
       </div>
-      <div
-    </div>
+    <div>
   </form>
+  <?php
+  include("connect.php");
+  if(isset($_POST['log']))
+  {
+    $un=$_POST['username'];
+    $up=$_POST['password'];
+
+    $check_user="SELECT * from user WHERE username='$un'AND password='$up'";
+
+    $run=mysqli_query($conn,$check_user);
+
+    if(mysqli_num_rows($run))
+    {
+        echo "<script>window.open('g.php','_self')</script>";
+
+        $_SESSION['username']=$un;
+
+    }
+    else
+    {
+      echo "<script>alert('Email or password is incorrect!')</script>";
+    }
+}
+
+   ?>
+</body>
 </html>
