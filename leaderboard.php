@@ -23,13 +23,16 @@
       header("Location: index.php");//redirect to the login page to secure the welcome page without login access.
     }
   ?>
+<nav class="navbar">
   <ul>
     <li><a href="g.php">Home</a></li>
+    <li><a href="profile.php"><?php echo $_SESSION['username'];?></a></li>
     <li><a href="updatepass.php">Update Password</a></li>
     <li><a href="allusers.php">View Players</a></li>
     <li style="float:right"><a class="active" href="#about">About</a></li>
     <li style="float:right"><a href="logout.php">Log out</a></li>
   </ul>
+</nav>
 <div class="table-scrol">
     <h1 align="center">Leaderboard</h1>
 
@@ -42,7 +45,6 @@
             <th>First Name</th>
             <th>Last Name</th>
             <th>User Name</th>
-            <th>Status</th>
             <th>Wins</th>
             <th>Losses</th>
             <th>Ties</th>
@@ -51,7 +53,7 @@
 
         <?php
         include("connect.php");
-        $view_users_query="SELECT user.firstname,user.lastname,user.username,user.status,game.win,game.loss,game.tie FROM user JOIN game ON (user.personid=game.personid) ORDER BY game.win DESC, game.loss ASC";//select query for viewing users.
+        $view_users_query="SELECT user.firstname,user.lastname,user.username,game.win,game.loss,game.tie FROM user JOIN game ON (user.personid=game.personid) ORDER BY game.win DESC, game.loss ASC";//select query for viewing users.
         $run=mysqli_query($conn,$view_users_query);
 
         while($row=mysqli_fetch_array($run))
@@ -59,10 +61,9 @@
             $firstname=$row[0];
             $lastname=$row[1];
             $username=$row[2];
-            $status=$row[3];
-            $wins=$row[4];
-            $losses=$row[5];
-            $ties=$row[6];
+            $wins=$row[3];
+            $losses=$row[4];
+            $ties=$row[5];
 
         ?>
 
@@ -70,7 +71,6 @@
             <td><?php echo $firstname;  ?></td>
             <td><?php echo $lastname;  ?></td>
             <td><?php echo $username;  ?></td>
-            <td><?php echo $status;  ?></td>
             <td><?php echo $wins;  ?></td>
             <td><?php echo $losses;  ?></td>
             <td><?php echo $ties;  ?></td>

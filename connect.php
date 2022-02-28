@@ -1,5 +1,5 @@
 <?php
-    session_start();
+    //session_start();
     $servername = "localhost";
     $username = "root";
     $password = "";
@@ -13,7 +13,7 @@
 
 
     if($conn) {
-        //echo "success";
+        //echo "success!";
     }
     else {
         die("Error". mysqli_connect_error());

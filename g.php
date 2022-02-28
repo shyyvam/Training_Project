@@ -5,9 +5,6 @@ if(!$_SESSION['username'])
 {
   header("Location: index.php");//redirect to the login page to secure the welcome page without login access.
 }
-/*(if($_SERVER["REQUEST_METHOD"] == "POST") {
-   include("connect.php");
- }*/
 
 if ( isset($_POST['logout']) )
 {
@@ -63,6 +60,7 @@ function check($computer, $human) {
 
 // Check to see how the play happenned
 $result = check($computer, $human);
+$msg=0;
 if($result)
 {
     $usernamenew=$_SESSION['username'];
@@ -73,7 +71,7 @@ if($result)
       SET `win`= `win`+1
       WHERE `username` = '$usernamenew'"))
       {
-        echo "Play again!";
+        $msg= 1;
       }
       else
       {
@@ -86,7 +84,7 @@ if($result)
       SET `loss`= `loss`+1
       WHERE `username` = '$usernamenew'"))
       {
-        echo "Play again!";
+        $msg=1;
       }
       else
       {
@@ -99,7 +97,7 @@ if($result)
       SET `tie`= `tie`+1
       WHERE `username` = '$usernamenew'"))
       {
-        echo "Play again!";
+        $msg=1;
       }
       else
       {
@@ -118,18 +116,40 @@ if($result)
 <head>
   <title>Training Project- Rock, Paper, Scissors Game</title>
   <link rel="stylesheet" type="text/css" href="style1.css">
-<?php require_once "bootstrap.php"; ?>
+  <?php //require_once "bootstrap.php"; ?>
+  <style>
+  .container {
+    text-align: center;
+    border: 1px solid #FFFF00;
+    background-color: #6f4e37;
+    border-radius: 10px;
+    margin-top: 90px;
+    width: 40%;
+    height: 90;
+    margin: auto;
+    margin-top: 90px;
+
+  }
+  .heading{
+    text-align: center;
+  }
+  </style>
+
 </head>
 <body>
-<ul>
-    <li><a href="profile.php"><?php echo $_SESSION['username']?></a></li>
-    <li><a href="leaderboard.php">Leaderboard</a></li>
-    <li style="float:right"><a class="active" href="#about">About</a></li>
-    <li style="float:right"><a href="logout.php">Log out</a></li>
-</ul>
-<div class="container">
+<header>
+  <nav class="navbar">
+    <ul>
+      <li><a href="profile.php"><?php echo $_SESSION['username']?></a></li>
+      <li><a href="leaderboard.php">Leaderboard</a></li>
+      <li style="float:right;"><a class="active" href="#about">About</a></li>
+      <li style="float:right;"><a href="logout.php">Log out</a></li>
+    </ul>
+  </nav>
+</header>
 
-<h1>Rock Paper Scissors</h1>
+<div class="container">
+<h1 style="color:#EFE2BA;" class="heading">Rock Paper Scissors</h1>
 <form action="g.php" method="post" >
   <select name="human">
       <option value="-1">Select</option>
@@ -141,7 +161,8 @@ if($result)
   <input type="submit" value="Play">
 </form>
 
-<pre>
+
+<pre style="color:#EFE2BA;">
 <?php
 if ( $human == -1 )
 {
@@ -162,8 +183,16 @@ else
 {
     print "Your Play=$names[$human] Computer Play=$names[$computer] Result=$result\n";
 }
+
 ?>
 </pre>
+<p style="color:#04AA6D;"><?php if($msg===1)
+{
+  echo "Play Again!";
+  $msg=0;
+}
+
+?></p>
 </div>
 </body>
 </html>
