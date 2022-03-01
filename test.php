@@ -116,7 +116,6 @@ if($result)
 <head>
   <title>Training Project- Rock, Paper, Scissors Game</title>
   <link rel="stylesheet" type="text/css" href="style1.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <?php //require_once "bootstrap.php"; ?>
   <style>
   .container {
@@ -169,7 +168,7 @@ if($result)
 
 <div class="container">
 <h1 style="color:#EFE2BA;" class="heading">Rock Paper Scissors</h1>
-<form action="g.php" method="post" >
+<form action="test.php" method="post" >
   <label>
     <input style="height: 30px; width: 30px;" type="radio" name="human" value="0" checked>ROCK
     <img src="icons8-rock-50.png">
@@ -183,6 +182,10 @@ if($result)
     <input style="height: 30px; width: 30px;" type="radio" name="human" value="2">SCISSORS
     <img src="scissors.png">
   </label>
+  <label style="margin-left: 65px;">
+    <input style="height: 30px; width: 30px;" type="radio" name="human" value="3">
+    <img src="https://via.placeholder.com/40x60/b0f/fff&text=B">
+  </label>
   <br><br>
   <input style="background-color: RED; border-radius: 6px;" type="submit" name="btn" value="Play">
 </form>
@@ -194,30 +197,20 @@ if ( $human == -1 )
 {
     print "Please select a strategy and press Play.\n";
 }
+else if ( $human == 3 )
+{
+    for($c=0;$c<3;$c++)
+    {
+        for($h=0;$h<3;$h++)
+        {
+            $r = check($c, $h);
+            print "Human=$names[$h] Computer=$names[$c] Result=$r\n";
+        }
+    }
+}
 else
 {
-    if($computer == 0)
-    {
-      echo '<img src="icons8-rock-50.png"><br>';
-      echo "Computer chooses ROCK";
-      echo '<br>';
-      echo "$result";
-    }
-    else if($computer == 1)
-    {
-      echo '<img src="icons8-paper-50.png"><br>';
-      echo "Computer chooses PAPER";
-      echo '<br>';
-      echo "$result";
-    }
-    else if($computer == 2)
-    {
-      echo '<img src="scissors.png"><br>';
-      echo "Computer chooses SCISSORS";
-      echo '<br>';
-      echo "$result";
-    }
-    //print "Your Play=$names[$human] Computer Play=$names[$computer] Result=$result\n";
+    print "Your Play=$names[$human] Computer Play=$names[$computer] Result=$result\n";
 }
 
 ?>
@@ -230,31 +223,5 @@ else
 
 ?></p>
 </div>
-<script>
-  function updateUserStatus()
-  {
-    jQuery.ajax({
-        url:'update_user_status.php',
-        success:function(){
-
-        }
-    });
-  }
-  function getUserStatus()
-  {
-    jQuery.ajax({
-        url:'get_user_status.php',
-        success:function(result){
-          jQuery('#user_grid').html(result);
-        }
-    });
-  }
-  setInterval(function(){
-    updateUserStatus();
-  },1000);
-  setInterval(function(){
-    getUserStatus();
-  },2000);
-</script>
 </body>
 </html>

@@ -9,6 +9,7 @@ if(!$_SESSION['username'])
 <html>
 <head>
   <link rel="stylesheet" type="text/css" href="style1.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <style>
       .password {
         text-align: center;
@@ -68,6 +69,32 @@ if(!$_SESSION['username'])
    </form>
 </div>
 </body>
+<script>
+  function updateUserStatus()
+  {
+    jQuery.ajax({
+        url:'update_user_status.php',
+        success:function(){
+
+        }
+    });
+  }
+  function getUserStatus()
+  {
+    jQuery.ajax({
+        url:'get_user_status.php',
+        success:function(result){
+          jQuery('#user_grid').html(result);
+        }
+    });
+  }
+  setInterval(function(){
+    updateUserStatus();
+  },1000);
+  setInterval(function(){
+    getUserStatus();
+  },2000);
+</script>
 </html>
 <?php
 $pass = $_SESSION['username'];

@@ -2,6 +2,7 @@
 <html>
 <head>
   <link rel="stylesheet" type="text/css" href="style1.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <style>
   h1
   {
@@ -90,6 +91,31 @@ while($row=mysqli_fetch_array($run))
 </tr>
 <?php } ?>
 </table>
+<script>
+  function updateUserStatus()
+  {
+    jQuery.ajax({
+        url:'update_user_status.php',
+        success:function(){
 
+        }
+    });
+  }
+  function getUserStatus()
+  {
+    jQuery.ajax({
+        url:'get_user_status.php',
+        success:function(result){
+          jQuery('#user_grid').html(result);
+        }
+    });
+  }
+  setInterval(function(){
+    updateUserStatus();
+  },1000);
+  setInterval(function(){
+    getUserStatus();
+  },2000);
+</script>
 </body>
 </html>
