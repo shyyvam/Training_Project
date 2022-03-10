@@ -131,13 +131,15 @@ $checkuser="SELECT * FROM `user` WHERE username= '$uname'";
 $result=mysqli_query($conn,$checkuser);
 $count=mysqli_num_rows($result);
 
+
     if($count==1)
     {
         echo "This username already exists";
     }
     else
     {
-
+      mysqli_begin_transaction($conn);
+      mysqli_autocommit($conn,FALSE);
       $sql = "INSERT INTO user(firstname,lastname,username,password)  VALUES ('$fname',
            '$lname','$uname','$pass')";
       $sql2 = "INSERT INTO game(personid,username) SELECT personid,username FROM user WHERE username = '$uname'";
@@ -148,13 +150,14 @@ $count=mysqli_num_rows($result);
            echo "<h3>Registered successfully.";
            //header("Location: index.php");//redirect to the login page to secure the welcome page without login access.
 
-
+           mysqli_commit($conn);
            echo nl2br(" Welcome \n$fname\n $lname\n ");
        }
        else
        {
            echo "ERROR: Hush! Sorry $sql. "
                . mysqli_error($conn);
+            mysqli_rollback($conn);
        }
      }
 
