@@ -57,7 +57,7 @@ if(isset($_POST['log']))
 
         .logo {
             margin-bottom: 15px;
-            margin-top: 0px;
+            margin-top: 5px;
             padding-top: 0;
         }
 
@@ -130,6 +130,9 @@ if(isset($_POST['log']))
             color: grey;
 
         }
+        #userName,#passWord {
+            text-align: center;
+        }
 
         p {
             text-align: center;
@@ -144,7 +147,7 @@ if(isset($_POST['log']))
 
         <div class="container">
             <div class="logo">
-                <img src="https://mindbodyshe.com/wp-content/uploads/2018/07/samples-of-logo-designs-sample-of-company-logo-design-ngo-logo-design-samples.jpg " alt="Company Logo" srcset="">
+                <img src="rps.jpg" alt="Company Logo" srcset="">
             </div>
             <div class="login-form">
                 <form action="login.php" method="post">
@@ -167,7 +170,6 @@ if(isset($_POST['log']))
 
                     </div>
                 </form>
-                <p>Shivam</p>
             </div>
         </div>
     </div>
