@@ -1,54 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
 
-
-<!doctype html>
-
-<html>
 <head>
-  <title>REGISTRATION
-  </title>
-  <link rel="stylesheet" type="text/css" href="style.css">
-  </head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        html {
+            background: #EFE2BA;
+        }
+
+        .body-content {
+            padding-top: 20vh;
+        }
+
+        .container {
+            width: 350px;
+            height: 450px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: auto;
+            border: 2px solid White;
+            border-radius: 15px;
+            background: white;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-item {
+            margin: 5px;
+            padding-bottom: 10px;
+            display: flex;
+        }
+
+        .form-item label {
+            display: block;
+            padding: 2px;
+            font-size: 20px;
+            width: 100px;
+        }
+
+        .form-item input {
+            width: 320px;
+            height: 35px;
+            border: 2px solid #e1dede69;
+            border-radius: 20px;
+            background: #e1dede69;
+            color: grey;
+        }
+
+        .form-btns {
+            display: flex;
+            flex-direction: column;
+            margin: auto;
+            padding: 10px 0;
+        }
+
+        .form-btns button {
+            margin: auto;
+            font-size: 20px;
+            padding: 5px 15px;
+            border: 2px solid;
+            border-radius: 15px;
+            color: white;
+            background: #7E685A;
+            width: 280px;
+            cursor: pointer;
+        }
+
+        .options {
+            padding-top: 15px;
+            margin: auto;
+        }
+
+        .options a {
+            text-decoration: none;
+            color: black;
+            margin: 0 40px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 15px;
+
+        }
+        .options a:hover {
+            color: grey;
+
+        }
+        #userName,#passWord,#firstName,#lastName,#cpassWord {
+            text-align: center;
+        }
+
+        p {
+            text-align: center;
+            font-size: 10px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+    </style>
+</head>
 
 <body>
+    <div class="body-content">
+        <div class="container">
+          <h2 class="text-center">Register Here!</h2>
+            <div class="login-form">
+                <form action="register.php" method="post">
+                    <div class="form-item">
+                        <!-- <label for="userName">Username:</label> -->
+                        <input type="text" name="firstName" id="firstName" placeholder="Firstname" required>
+                    </div>
+                    <div class="form-item">
+                        <!-- <label for="passWord">Password:</label> -->
+                        <input type="text" name="lastName" id="lastName" placeholder="Lastname" required>
+                    </div>
+                    <div class="form-item">
+                        <!-- <label for="passWord">Password:</label> -->
+                        <input type="text" name="userName" id="userName" placeholder="Username" required>
+                    </div>
+                    <div class="form-item">
+                        <!-- <label for="passWord">Password:</label> -->
+                        <input type="password" name="passWord" id="passWord" placeholder="Password" required>
+                    </div>
+                    <div class="form-item">
+                        <!-- <label for="passWord">Password:</label> -->
+                        <input type="password" name="cpassWord" id="cpassWord" placeholder="Confirm Password" required>
+                    </div>
 
-<div class="container ">
+                    <div class="form-btns">
 
-    <h2 class="text-center">Register Here!</h2>
-    <form method="post" action="register.php">
-        <div class="form-group">
-            <label for="fname">First Name</label>
-            <input type="text" class="form-control" name="fname" id="fname" placeholder="Enter First Name" minlength="2" maxlength="15" required>
-        </div>
-        <br></br>
-        <div class="form-group">
-            <label for="lname">Last Name</label>
-            <input type="text" class="form-control" name="lname" id="lname" placeholder="Enter Last Name" minlength="2" maxlength="15" required>
-        </div>
-        <br></br>
-        <div class="form-group">
-            <label for="username">Username</label>
-        <input type="text" class="form-control" name="username" id="username" placeholder="Enter User Name" minlength="3" maxlength="10" pattern="[a-z0-9]+" required>
-        </div>
-        <br></br>
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" name="password" id="password" placeholder="Enter Password" id="password" minlength="8" pattern="[a-zA-Z0-9]+" required>
-        </div>
-        <br></br>
-        <div class="form-group">
-            <label for="cpassword">Confirm Password</label>
-            <input type="password" class="form-control" name="cpassword" id="cpassword" placeholder="Enter password again" id="cpassword" minlength="8"  required>
-        </div>
+                        <button type="submit" value="register" name="register" id="register">Register</button>
+                        <div class="options">
+                            <span>Already registered?<a href="index.php">Log In</a></span>
+                        </div>
 
-        <button type="submit" class="btn btn-primary" value="register" name="register">
-        SignUp
-        </button>
 
-    </form>
-    <div>
-      <p>Already registered?<a href="index.php">Log in</a>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-</div>
 </body>
 <?php
 include("connect.php");
@@ -56,11 +150,11 @@ if(isset($_POST['register']))
 {
 
 $fer = $ler = $per = $cper = "";
-$fname = $_POST['fname'];
-$lname = $_POST['lname'];
-$pass = $_POST['password'];
-$cpass = $_POST['cpassword'];
-$uname =$_POST['username'];
+$fname = $_POST['firstName'];
+$lname = $_POST['lastName'];
+$pass = $_POST['passWord'];
+$cpass = $_POST['cpassWord'];
+$uname =$_POST['userName'];
 
 
   if($uname=='')
@@ -140,6 +234,7 @@ $count=mysqli_num_rows($result);
     {
       mysqli_begin_transaction($conn);
       mysqli_autocommit($conn,FALSE);
+
       $sql = "INSERT INTO user(firstname,lastname,username,password)  VALUES ('$fname',
            '$lname','$uname','$pass')";
       $sql2 = "INSERT INTO game(personid,username) SELECT personid,username FROM user WHERE username = '$uname'";
@@ -158,10 +253,11 @@ $count=mysqli_num_rows($result);
            echo "ERROR: Hush! Sorry $sql. "
                . mysqli_error($conn);
             mysqli_rollback($conn);
+            mysqli_commit($conn);
        }
      }
 
 }
-
 ?>
+
 </html>
